@@ -1,0 +1,46 @@
+---
+- hosts: all
+
+  tasks:
+    - include: tasks/apt_system.yml
+
+    - name: installing virtualenv...
+      sudo: yes
+      apt: pkg={{ item }} state=installed update_cache=yes
+      with_items:
+        - python-virtualenv
+        - npm
+        - build-essential
+
+    - name: installing nodeenv...
+      pip: name=nodeenv virtualenv={{ virtualenv_path }}
+
+    - name: converting virtualenv into nodeenv...
+      command: /vagrant/venv/bin/nodeenv -p chdir=/vagrant/venv/
+
+    - name: installing less...
+      sudo: yes
+      npm: name=less global=yes
+
+    - include: tasks/apt_git.yml
+
+    - include: tasks/mdot.yml
+
+    - name: check for project already created...
+      stat: path=/vagrant/venv/yourporject
+      register: mdotproj
+
+    - name: create project...
+      command: /vagrant/venv/bin/django-admin.py startproject yourproject chdir=/vagrant/venv/
+      when: mdotproj.stat.exists
+
+    - name: copy urls.py into place...
+      sudo: yes
+      template: src="templates/urls.py" dest="/vagrant/venv/yourproject/yourproject/"
+
+    - name: copy settings.py into place...
+      sudo: yes
+      template: src="templates/settings.py" dest="/vagrant/venv/yourproject/yourproject/"
+
+    - name: sync mdot database...
+      django_manage: command=syncdb app_path={{ virtualenv_path }}/yourproject/ virtualenv={{ virtualenv_path }}
