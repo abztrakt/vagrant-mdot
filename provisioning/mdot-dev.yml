@@ -32,7 +32,7 @@
 
     - name: create project...
       command: /vagrant/venv/bin/django-admin.py startproject yourproject chdir=/vagrant/venv/
-      when: mdotproj.stat.exists
+      when: not mdotproj.stat.exists
 
     - name: copy urls.py into place...
       sudo: yes
