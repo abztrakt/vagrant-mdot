@@ -27,7 +27,7 @@
     - include: tasks/mdot.yml
 
     - name: check for project already created...
-      stat: path=/vagrant/venv/yourporject
+      stat: path=/vagrant/venv/yourproject
       register: mdotproj
 
     - name: create project...
