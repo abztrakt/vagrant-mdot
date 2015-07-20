@@ -1,4 +1,7 @@
 
     - name: install mdot from github...
-      pip: name="git+https://github.com/uw-it-aca/mdot/#egg=mdot" virtualenv={{ virtualenv_path }}
+      pip: name={{ item }} virtualenv={{ virtualenv_path }}
       ignore_errors: yes
+      with_items:
+        - git+https://github.com/uw-it-aca/mdot/#egg=mdot
+        - git+https://github.com/uw-it-aca/mdot-rest/#egg=mdot_rest
