@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'templatetag_handlebars',
     'easy_pjax',
     'mdot',
+    'mdot_rest',
 )
 
 MIDDLEWARE_CLASSES = (
