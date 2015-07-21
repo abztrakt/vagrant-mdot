@@ -27,20 +27,20 @@
     - include: tasks/mdot.yml
 
     - name: check for project already created...
-      stat: path=/vagrant/venv/yourproject
+      stat: path=/vagrant/venv/{{ project_name }}
       register: mdotproj
 
     - name: create project...
-      command: /vagrant/venv/bin/django-admin.py startproject yourproject chdir=/vagrant/venv/
+      command: /vagrant/venv/bin/django-admin.py startproject {{project_name }} chdir=/vagrant/venv/
       when: not mdotproj.stat.exists
 
     - name: copy urls.py into place...
       sudo: yes
-      template: src="templates/urls.py" dest="/vagrant/venv/yourproject/yourproject/"
+      template: src="templates/urls.py" dest="/vagrant/venv/{{ project_name }}/{{ project_name }}/"
 
     - name: copy settings.py into place...
       sudo: yes
-      template: src="templates/settings.py" dest="/vagrant/venv/yourproject/yourproject/"
+      template: src="templates/settings.py" dest="/vagrant/venv/{{ project_name }}/{{ project_name }}/"
 
     - name: sync mdot database...
-      django_manage: command=syncdb app_path={{ virtualenv_path }}/yourproject/ virtualenv={{ virtualenv_path }}
+      django_manage: command=syncdb app_path={{ virtualenv_path }}/{{ project_name }}/ virtualenv={{ virtualenv_path }}
