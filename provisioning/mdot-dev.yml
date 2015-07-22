@@ -2,6 +2,15 @@
 - hosts: all
 
   tasks:
+
+    - name: checking if up or reload...
+      stat: path=/home/vagrant/notinitial
+      register: notinitial
+
+    - name: create flag directory if initial up...
+      command: touch notinitial chdir=/home/vagrant/
+      when: not notinitial.stat.exists
+
     - include: tasks/apt_system.yml
 
     - name: installing virtualenv...
@@ -14,9 +23,11 @@
 
     - name: installing nodeenv...
       pip: name=nodeenv virtualenv={{ virtualenv_path }}
+      when: not notinitial.stat.exists
 
     - name: converting virtualenv into nodeenv...
       command: /vagrant/venv/bin/nodeenv -p chdir=/vagrant/venv/
+      when: not notinitial.stat.exists
 
     - name: installing less...
       sudo: yes
