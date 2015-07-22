@@ -40,8 +40,9 @@ INSTALLED_APPS = (
     'compressor',
     'templatetag_handlebars',
     'easy_pjax',
-    'mdot',
+    'rest_framework',
     'mdot_rest',
+    'mdot',
 )
 
 MIDDLEWARE_CLASSES = (
