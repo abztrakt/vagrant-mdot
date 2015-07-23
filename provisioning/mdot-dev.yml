@@ -53,6 +53,9 @@
       sudo: yes
       template: src="templates/settings.py" dest="/vagrant/venv/{{ project_name }}/{{ project_name }}/"
 
+    - name: making manage.py executable...
+      file: path="/vagrant/venv/{{ project_name }}/manage.py" state=touch mode="u+x"
+
     - include: tasks/precommit_hook.yml
 
     - name: sync mdot database...
