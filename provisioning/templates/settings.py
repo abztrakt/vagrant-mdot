@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'templatetag_handlebars',
     'easy_pjax',
     'rest_framework',
+    'mdotdevs',
     'mdot_rest',
     'mdot',
 )
@@ -141,4 +142,8 @@ DETECT_USER_AGENTS = {
     'is_windows_phone': agent.detectWindowsPhone,
     'is_tablet' : agent.detectTierTablet,
     'is_mobile': agent.detectMobileQuick,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
