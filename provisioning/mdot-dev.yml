@@ -17,9 +17,11 @@
       sudo: yes
       apt: pkg={{ item }} state=installed update_cache=yes
       with_items:
+        - build-essential
+        - libjpeg-dev
+        - python-dev
         - python-virtualenv
         - npm
-        - build-essential
 
     - name: installing nodeenv...
       pip: name=nodeenv virtualenv={{ virtualenv_path }}
