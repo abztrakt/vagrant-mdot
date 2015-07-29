@@ -1,5 +1,8 @@
 ---
 - hosts: all
+  vars:
+    settings_secret_key: "{{ lookup('password', playbook_dir + '/generated/secretkey chars=ascii_letters,digits,hexdigits,punctuation') }}"
+
 
   tasks:
 
