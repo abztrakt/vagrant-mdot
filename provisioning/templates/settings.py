@@ -143,3 +143,7 @@ DETECT_USER_AGENTS = {
     'is_tablet' : agent.detectTierTablet,
     'is_mobile': agent.detectMobileQuick,
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+}
