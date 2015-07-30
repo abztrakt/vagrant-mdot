@@ -7,3 +7,11 @@
         - git+https://github.com/uw-it-aca/mdot/#egg=mdot
         - git+https://github.com/uw-it-aca/mdot-rest/#egg=mdot_rest
         - git+https://github.com/uw-it-aca/mdot-developers.git#egg=mdotdevs
+
+    - name: checkout develop branch of repositories...
+      git: repo={{ item }} clone=no update=no version=develop
+      when: not notinitial.stat.exists
+      with_items:
+        - https://github.com/uw-it-aca/mdot-rest.git
+        - https://github.com/uw-it-aca/mdot.git
+        - https://github.com/uw-it-aca/mdot-developers.git
