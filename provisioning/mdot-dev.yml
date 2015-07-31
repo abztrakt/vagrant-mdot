@@ -21,6 +21,8 @@
       apt: pkg={{ item }} state=installed update_cache=yes
       with_items:
         - build-essential
+        - libxml2-dev
+        - libxslt1-dev
         - libjpeg-dev
         - python-dev
         - python-virtualenv
