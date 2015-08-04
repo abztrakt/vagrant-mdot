@@ -133,6 +133,8 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # devtools
 ACA_DEVTOOLS_ENABLED = True
 
