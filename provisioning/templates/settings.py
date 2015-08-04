@@ -150,3 +150,6 @@ DETECT_USER_AGENTS = {
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
+
+#RESTCLIENTS_MDOT_DAO_CLASS = 'mdot.mdot_rest_client.client.MDOTLive'
+RESTCLIENTS_MDOT_HOST = 'http://localhost:8000/'
