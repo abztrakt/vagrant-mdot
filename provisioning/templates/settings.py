@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django_mobileesp.detector import mobileesp_agent as agent
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -115,7 +116,7 @@ STATIC_URL = '/static/'
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    'compressor.finders.CompressorFinder',
+    "compressor.finders.CompressorFinder",
 )
 
 MEDIA_ROOT = '/vagrant/'
@@ -123,8 +124,8 @@ MEDIA_URL = '/media/'
 
 COMPRESS_ROOT = "/tmp/some/path/for/files"
 COMPRESS_PRECOMPILERS = (('text/less', 'lessc {infile} {outfile}'),)
-COMPRESS_ENABLED = False # True if you want to compress your development build
-COMPRESS_OFFLINE = False # True if you want to compress your build offline
+COMPRESS_ENABLED = False  # True if you want to compress your development build
+COMPRESS_OFFLINE = False  # True if you want to compress your build offline
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter'
@@ -139,13 +140,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACA_DEVTOOLS_ENABLED = True
 
 # mobileesp
-from django_mobileesp.detector import mobileesp_agent as agent
 
 DETECT_USER_AGENTS = {
     'is_android': agent.detectAndroid,
     'is_ios': agent.detectIos,
     'is_windows_phone': agent.detectWindowsPhone,
-    'is_tablet' : agent.detectTierTablet,
+    'is_tablet': agent.detectTierTablet,
     'is_mobile': agent.detectMobileQuick,
 }
 
@@ -153,5 +153,5 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
 
-#RESTCLIENTS_MDOT_DAO_CLASS = 'mdot.mdot_rest_client.client.MDOTLive'
+# RESTCLIENTS_MDOT_DAO_CLASS = 'mdot.mdot_rest_client.client.MDOTLive'
 RESTCLIENTS_MDOT_HOST = 'http://localhost:8000/'
