@@ -6,64 +6,22 @@
 
   tasks:
 
-    - name: checking if up or reload...
-      stat: path=/home/vagrant/notinitial
-      register: notinitial
-
-    - name: create flag directory if initial up...
-      command: touch notinitial chdir=/home/vagrant/
-      when: not notinitial.stat.exists
+    - include: tasks/initial.yml
 
     - include: tasks/apt_system.yml
 
-    - name: installing virtualenv...
-      sudo: yes
-      apt: pkg={{ item }} state=installed update_cache=yes
-      with_items:
-        - build-essential
-        - libxml2-dev
-        - libxslt1-dev
-        - libjpeg-dev
-        - python-dev
-        - python-virtualenv
-        - npm
+    - include: tasks/apt_virtualenv.yml
 
-    - name: installing nodeenv...
-      pip: name=nodeenv virtualenv={{ virtualenv_path }}
-      when: not notinitial.stat.exists
-
-    - name: converting virtualenv into nodeenv...
-      command: /vagrant/venv/bin/nodeenv -p chdir=/vagrant/venv/
-      when: not notinitial.stat.exists
-
-    - name: installing less...
-      sudo: yes
-      npm: name=less global=yes
+    - include: tasks/npm_less.yml
 
     - include: tasks/apt_git.yml
 
     - include: tasks/mdot.yml
 
-    - name: check for project already created...
-      stat: path=/vagrant/venv/{{ project_name }}
-      register: mdotproj
+    - include: tasks/create_proj.yml
 
-    - name: create project...
-      command: /vagrant/venv/bin/django-admin.py startproject {{project_name }} chdir=/vagrant/venv/
-      when: not mdotproj.stat.exists
-
-    - name: copy urls.py into place...
-      sudo: yes
-      template: src="templates/urls.py" dest="/vagrant/venv/{{ project_name }}/{{ project_name }}/"
-
-    - name: copy settings.py into place...
-      sudo: yes
-      template: src="templates/settings.py" dest="/vagrant/venv/{{ project_name }}/{{ project_name }}/"
-
-    - name: making manage.py executable...
-      file: path="/vagrant/venv/{{ project_name }}/manage.py" state=touch mode="u+x"
+    - include: tasks/django_utils.yml
 
     - include: tasks/precommit_hook.yml
 
-    - name: sync mdot database...
-      django_manage: command=syncdb app_path={{ virtualenv_path }}/{{ project_name }}/ virtualenv={{ virtualenv_path }}
+    - include: tasks/migrate_database.yml
