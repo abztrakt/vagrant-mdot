@@ -16,7 +16,7 @@
 
     - include: tasks/apt_git.yml
 
-    - include: tasks/mdot.yml
+    - include: tasks/app.yml
 
     - include: tasks/create_proj.yml
 

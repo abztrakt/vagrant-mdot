@@ -1,2 +1,3 @@
 virtualenv_path: "/vagrant/venv"
 project_name: "mdotproject"
+git_eggs: '["git+https://github.com/uw-it-aca/mdot@develop#egg=mdot", "git+https://github.com/uw-it-aca/mdot-rest@develop#egg=mdot_rest", "git+https://github.com/uw-it-aca/mdot-developers.git@develop#egg=mdotdevs"]'
