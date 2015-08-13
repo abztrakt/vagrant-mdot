@@ -12,7 +12,7 @@
 
     - include: tasks/apt_virtualenv.yml
 
-    - include: tasks/npm_less.yml
+    - include: tasks/npm.yml
 
     - include: tasks/apt_git.yml
 
