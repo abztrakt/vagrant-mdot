@@ -25,3 +25,5 @@
     - include: tasks/precommit_hook.yml
 
     - include: tasks/migrate_database.yml
+
+    - template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
