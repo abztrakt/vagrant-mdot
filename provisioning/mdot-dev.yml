@@ -26,4 +26,8 @@
 
     - include: tasks/migrate_database.yml
 
-    - template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
+    - name: template screenrc into home...
+      template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
+    
+    - name: template vimrc into home...
+      template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
