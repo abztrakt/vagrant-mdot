@@ -28,6 +28,6 @@
 
     - name: template screenrc into home...
       template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
-    
+
     - name: template vimrc into home...
-      template: src="templates/screenrc" dest="/home/vagrant/.screenrc"
+      template: src="templates/vimrc" dest="/home/vagrant/.vimrc"
