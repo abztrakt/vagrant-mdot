@@ -2,7 +2,8 @@
 - hosts: all
   vars:
     settings_secret_key: "{{ lookup('password', playbook_dir + '/generated/secretkey chars=ascii_letters,digits,hexdigits,punctuation') }}"
-
+    mysql_root_password: "{{ lookup('password', playbook_dir + '/generated/mysqlrt chars=ascii_letters,digits,hexdigits,punctuation') }}"
+    mysql_app_password: "{{ lookup('password', playbook_dir + '/generated/mysqlapp chars=ascii_letters,digits,hexdigits,punctuation') }}"
 
   tasks:
 
@@ -23,6 +24,11 @@
     - include: tasks/django_utils.yml
 
     - include: tasks/precommit_hook.yml
+
+    - include: tasks/apt_mysql.yml
+
+    - name: Install mysql-python...
+      pip: name=mysql-python virtualenv=/vagrant/venv
 
     - include: tasks/migrate_database.yml
 
