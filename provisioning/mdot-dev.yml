@@ -22,6 +22,11 @@
 
     - include: tasks/django_utils.yml
 
+    - name: install requirements for mdot...
+      pip: requirements=/vagrant/venv/src/{{ item }}/requirements.txt chdir=/vagrant/venv/src/{{ item }} virtualenv=/vagrant/venv
+      with_items:
+          - "{{ app_names }}"
+
     - include: tasks/precommit_hook.yml
 
     - include: tasks/migrate_database.yml
